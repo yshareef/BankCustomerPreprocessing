@@ -9,6 +9,7 @@ import pickle
 from flask_restful import Resource, Api, reqparse
 from data_extraction import data_extraction_service
 from data_cleaning import data_cleaning_service
+from constants import Constants
 
 app = Flask(__name__)
 api = Api(app)
@@ -29,6 +30,7 @@ class DataCleaningResource(Resource):
             return 'Unimplemented path'
 
         cleaned_df = data_cleaning_service.clean_data(df)
+
         return {"cleaned_df": cleaned_df.to_dict()}, 200
 
 

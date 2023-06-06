@@ -26,16 +26,16 @@ class DataExtraction:
                      'ONEOFF_PURCHASES_FREQUENCY', 'PURCHASES_INSTALLMENTS_FREQUENCY',
                      'CASH_ADVANCE_FREQUENCY', 'CASH_ADVANCE_TRX', 'PURCHASES_TRX',
                      'CREDIT_LIMIT', 'PAYMENTS', 'MINIMUM_PAYMENTS',
-                     'PRC_FULL_PAYMENT'])
+                     'PRC_FULL_PAYMENT', 'TENURE'])
 
         # process all csv files
         for csvfile in glob.glob(DATA_DIR + "/*.csv"):
-            extracted_data = extracted_data.append(self.extract_from_csv(csvfile), ignore_index=True)
+            extracted_data = pd.concat([extracted_data, (self.extract_from_csv(csvfile))], ignore_index=True)
             print(csvfile)
 
         # process all json files
         for jsonfile in glob.glob(DATA_DIR + "/*.json"):
-            extracted_data = extracted_data.append(self.extract_from_json(jsonfile), ignore_index=True)
+            extracted_data = pd.concat([extracted_data, (self.extract_from_csv(jsonfile))], ignore_index=True)
 
         return extracted_data
 
